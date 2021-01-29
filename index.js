@@ -5,11 +5,15 @@ const commande = require("./function");
 // Et mon fichier dotenv
 require("dotenv").config();
 
+const axios = require("axios");
+
 // Je créer un client discord.
 const client = new Discord.Client();
 
 // Création d'un préfixe pour comprendre la commande
 const prefix = "!";
+
+const API_COVID = "https://disease.sh/v3/covid-19/countries";
 
 // Connexion
 client.on("message", function (message) {
@@ -30,23 +34,39 @@ client.on("message", function (message) {
 		// Si la command est ping alors execute la fonction commande.ping en passant le paramètre message
 		case "ping":
 			message.reply(
-				`Pong! This message had a latency of ${commande.ping(
-					message
-				)}ms.`
+				`Pong! Le message a une latence de ${commande.ping(message)}ms.`
 			);
 			break;
 		// Si c'est sum, tu envois les arguments en paramètres
 		case "sum":
 			message.reply(
-				`The sum of all the arguments you provided is ${commande.sum(
-					args
-				)}!`
+				`La sommes des arguments vaut ${commande.sum(args)}!`
 			);
+			break;
+		case "covid":
+			axios
+				.get(`${API_COVID}/${args}`)
+				.then(function (response) {
+					const data = response.data;
+					// handle success
+
+					message.reply(
+						`les stats concernant le coronavirus en ${args} : \r\n Nombres de cas : ${data.cases} \r\n Nombres de morts : ${data.deaths} \r\n Nombres de guérisons : ${data.recovered}`
+					);
+				})
+				.catch(function (error) {
+					// handle error
+					console.log(error);
+					message.reply(
+						`Désolé, je ne connais pas le pays. Essai de l'écrire autrement`
+					);
+				});
+
 			break;
 		// Dans le reste des cas, tu indiques que tu connais pas la commande
 		default:
 			message.reply(
-				"Il faut me donner un ordre que je connais !sum ou !ping"
+				"Il faut me donner un ordre que je connais !sum ou !ping !covid"
 			);
 	}
 });
