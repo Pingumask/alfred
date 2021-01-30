@@ -5,6 +5,7 @@ const commande = require("./function");
 // Et mon fichier dotenv
 require("dotenv").config();
 
+/** Permet de faire des requete vers une API */
 const axios = require("axios");
 
 // Je créer un client discord.
@@ -14,6 +15,7 @@ const client = new Discord.Client();
 const prefix = "!";
 
 const API_COVID = "https://disease.sh/v3/covid-19/countries";
+const API_CHESS = "https://api.chess.com/pub/player";
 
 // Connexion
 client.on("message", function (message) {
@@ -43,6 +45,11 @@ client.on("message", function (message) {
 				`La sommes des arguments vaut ${commande.sum(args)}!`
 			);
 			break;
+		case "coinflip":
+			message.reply(
+				`Tu avais un dilemme et tu souhaite le résoudre avec pile ou face ? Voilà le résultat : ${commande.coinflip()}`
+			);
+			break;
 		case "covid":
 			axios
 				.get(`${API_COVID}/${args}`)
@@ -61,8 +68,31 @@ client.on("message", function (message) {
 						`Désolé, je ne connais pas le pays. Essai de l'écrire autrement`
 					);
 				});
-
 			break;
+		case "chess":
+			Promise.all([
+				commande.getUserAccount(args),
+				commande.getUserStats(args),
+			]).then(function (results) {
+				const acct = results[0].data;
+				const stats = results[1].data;
+
+				message.reply(
+					`Pour le joueur ${acct.username} voici ses stats
+					
+					> Partie rapide.
+- Gagnant : ${stats.chess_rapid.record.win}.
+- Perdant : ${stats.chess_rapid.record.loss}.
+- Null : ${stats.chess_rapid.record.draw}
+					
+					> Partie blitz. 
+- Gagnant : ${stats.chess_blitz.record.win}.
+- Perdant : ${stats.chess_blitz.record.loss}.
+- Null : ${stats.chess_blitz.record.draw}`
+				);
+			});
+			break;
+
 		// Dans le reste des cas, tu indiques que tu connais pas la commande
 		default:
 			message.reply(
