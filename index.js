@@ -15,7 +15,6 @@ const client = new Discord.Client();
 const prefix = "!";
 
 const API_COVID = "https://disease.sh/v3/covid-19/countries";
-const API_CHESS = "https://api.chess.com/pub/player";
 
 // Connexion
 client.on("message", function (message) {
@@ -45,11 +44,13 @@ client.on("message", function (message) {
 				`La sommes des arguments vaut ${commande.sum(args)}!`
 			);
 			break;
+		// Pile ou face
 		case "coinflip":
 			message.reply(
 				`Tu avais un dilemme et tu souhaite le résoudre avec pile ou face ? Voilà le résultat : ${commande.coinflip()}`
 			);
 			break;
+		// Stats covid
 		case "covid":
 			axios
 				.get(`${API_COVID}/${args}`)
@@ -57,7 +58,7 @@ client.on("message", function (message) {
 					const data = response.data;
 					// handle success
 
-					message.reply(
+					message.channel.send(
 						`les stats concernant le coronavirus en ${args} : \r\n Nombres de cas : ${data.cases} \r\n Nombres de morts : ${data.deaths} \r\n Nombres de guérisons : ${data.recovered}`
 					);
 				})
@@ -69,6 +70,20 @@ client.on("message", function (message) {
 					);
 				});
 			break;
+		// Puzzle avec chess.com
+		case "puzzle":
+			Promise.all([commande.puzzle()]).then(function (results) {
+				const puzzle = results[0].data;
+				// Create the attachment using MessageAttachment
+				const attachment = new Discord.MessageAttachment(puzzle.image);
+				message.channel.send(
+					`Le puzzle du jour : ${puzzle.title}
+Si vous souhaitez le faire c'est par [là](${puzzle.url})`,
+					attachment
+				);
+			});
+			break;
+		// Stats chess.com
 		case "chess":
 			Promise.all([
 				commande.getUserAccount(args),
@@ -77,7 +92,7 @@ client.on("message", function (message) {
 				const acct = results[0].data;
 				const stats = results[1].data;
 
-				message.reply(
+				message.channel.send(
 					`Pour le joueur ${acct.username} voici ses stats
 					
 					> Partie rapide.
@@ -96,7 +111,7 @@ client.on("message", function (message) {
 		// Dans le reste des cas, tu indiques que tu connais pas la commande
 		default:
 			message.reply(
-				"Il faut me donner un ordre que je connais !sum ou !ping !covid"
+				"Il faut me donner un ordre que je connais , n'hésite pas à voir le channel #📑-commande"
 			);
 	}
 });

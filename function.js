@@ -23,3 +23,7 @@ exports.getUserAccount = (args) => {
 exports.getUserStats = (args) => {
 	return axios.get(`https://api.chess.com/pub/player/${args}/stats`);
 };
+
+exports.puzzle = () => {
+	return axios.get("https://api.chess.com/pub/puzzle/random");
+};
