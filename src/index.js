@@ -44,6 +44,18 @@ client.on("message", function (message) {
 				`Tu avais un dilemme et tu souhaite le résoudre avec pile ou face ? Voilà le résultat : ${commande.coinflip()}`
 			);
 			break;
+		case "btc":
+			axios
+				.get(`https://blockchain.info/ticker`)
+				.then((response) => {
+					const data = response.data;
+					console.log(data.USD);
+					message.channel.send(
+						`Le prix actuel du BTC (prix du marché différé de 15 min) est de ${data.USD.symbol}${data.USD["15m"]} ou ${data.EUR["15m"]}${data.EUR.symbol}`
+					);
+				})
+				.catch();
+			break;
 		case "covid":
 			axios
 				.get(`${API_COVID}/${args}`)
@@ -107,7 +119,7 @@ Si vous souhaitez le faire c'est par [là](${puzzle.url})`,
 		// Par défaut
 		default:
 			message.reply(
-				"Il faut me donner un ordre que je connais , n'hésite pas à voir le channel #📑-commande"
+				"Il faut me donner un ordre que je connais , \r\n n'hésite pas à voir le channel #📑-commande"
 			);
 	}
 });

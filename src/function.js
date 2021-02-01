@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-exports.sum = function (args) {
+exports.sum = (args) => {
 	const numArgs = args.map((x) => parseFloat(x));
 	const sum = numArgs.reduce((counter, x) => (counter += x));
 	return sum;
