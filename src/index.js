@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-import * as commande from "./function";
+const commande = require("./function");
 require("dotenv").config();
 
 /** Permet de faire des requete vers une API */
