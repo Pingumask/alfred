@@ -1,9 +1,14 @@
-# Je créer un bot discord
+# Alfred le bot !
 
-Pour faire un test, j'ai créé un bot discord qui me permet de faire 2 actions
-- sum 
-    - fait la sommes des chiffres/nombres envoyé `!sum 1 2 40`
-- ping
-    - retourne la latence du message
+Que fait _Alfred_ ?
 
-Bien sûr, c'est un test, ceci est voué à évoluer.
+Il fait pas grand chose pour l'instant, à la base c'était pour tester mais je trouve ça rigolot alors je continue à le pimp.
+
+Les commandes sont :
+
+-   !sum pour l'addition de nombres (!sum 5 6 90)
+-   !ping pour connaitre la latence d'un message
+-   !covid pour connaitre le nombre de cas de covid dans un pays (!covid France)
+-   !chess pour connaitre les stats d'un joueur sur le site [chess.com](https://www.chess.com/home)
+
+Je pense l'améliorer mais n'hésiter si vous avez des idées à m'en faire part sur [twitter](https://twitter.com/Gorski_anthony) 😁

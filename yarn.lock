@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@babel/helper-plugin-utils@^7.0.0":
+  version "7.10.4"
+  resolved "https://registry.yarnpkg.com/@babel/helper-plugin-utils/-/helper-plugin-utils-7.10.4.tgz#2f75a831269d4f677de49986dff59927533cf375"
+  integrity sha512-O4KCvQA6lLiMU9l2eawBPMf1xPP8xPfB3iEQw150hOVTqj/rfXz0ThTb4HEzqQfs2Bmo5Ay8BzxfzVtBrr9dVg==
+
 "@discordjs/collection@^0.1.6":
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/@discordjs/collection/-/collection-0.1.6.tgz#9e9a7637f4e4e0688fd8b2b5c63133c91607682c"
@@ -34,6 +39,13 @@ axios@^0.21.1:
   integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==
   dependencies:
     follow-redirects "^1.10.0"
+
+babel-plugin-transform-commonjs@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-commonjs/-/babel-plugin-transform-commonjs-1.1.6.tgz#56927c87f0eba74e8037ff44d84057218fbf8a2c"
+  integrity sha512-nLPA5wR1LzYmJkYZSjIZVv5Fjqr+lBmgNCGCvUjHKnNGG1OX/kfWggUJECaowEW3D8SaLOyuOU2x4UQw6G5Rwg==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.0.0"
 
 combined-stream@^1.0.8:
   version "1.0.8"
