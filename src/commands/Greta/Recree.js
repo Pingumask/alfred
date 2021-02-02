@@ -20,18 +20,16 @@ module.exports = class Recree extends (
 			(role) => role.name === "Etudiants"
 		);
 
-		/** Je gère la date > 60 min */
-		if (dateStart.getMinutes() + 10 >= 60) {
-			dateEnd = `0${dateStart.getMinutes() + 10 - 60}`;
-		} else {
-			dateEnd = dateStart.getMinutes() + 10;
-		}
+		/** Je gère l'heure' de fin */
+		dateEnd = (dateStart.getMinutes() + 10) % 60;
 
 		/** J'envoi le 1er message */
 		message.channel.send(`
         🚀\r\n🚀🚀\r\n🚀🚀🚀\r\nC'est la récré les ami(e)s ! Il est ${dateStart.getHours()}h${
-			(dateStart.getMinutes() < 10 ? "0" : "") + dateStart.getMinutes()
-		}, \r\n On revient à ${dateEnd}\r\n🚀🚀🚀\r\n🚀🚀\r\n🚀`);
+			(dateStart.getMinutes() < 10 ? '0' : '') + dateStart.getMinutes()
+		}, \r\n On revient à ${
+			(dateEnd < 10 ? '0' : '') + dateEnd
+		}\r\n🚀🚀🚀\r\n🚀🚀\r\n🚀`);
 
 		/** Au bout de 10 minutes, je renvoi un message */
 		setTimeout(() => {
