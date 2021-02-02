@@ -17,7 +17,7 @@ module.exports = class Recree extends (
 
 		/** Get le role pour les pings */
 		let roleName = message.guild.roles.cache.find(
-			(role) => role.name === "Alfred"
+			(role) => role.name === "Etudiants"
 		);
 
 		/** Je gère la date > 60 min */
