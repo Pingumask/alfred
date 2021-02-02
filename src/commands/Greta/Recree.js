@@ -36,7 +36,7 @@ module.exports = class Recree extends (
 		/** Au bout de 10 minutes, je renvoi un message */
 		setTimeout(() => {
 			message.channel.send(`
-        🚀\r\n🚀🚀\r\n🚀🚀🚀\r\n Hey ${roleName}, la récré est fini ! \r\n🚀🚀🚀\r\n🚀🚀\r\n🚀`);
+        🚀\r\n🚀🚀\r\n🚀🚀🚀\r\n Hey @${roleName}, la récré est fini ! \r\n🚀🚀🚀\r\n🚀🚀\r\n🚀`);
 		}, tenMinutes);
 
 		/** Je supprime mon message pour ne pas spam */
