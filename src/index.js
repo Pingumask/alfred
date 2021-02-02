@@ -8,6 +8,7 @@ const Btc = require("./commands/Btc");
 const Chess = require("./commands/Chess/Chess");
 const Puzzle = require("./commands/Chess/Puzzle");
 const Covid = require("./commands/Covid");
+const Recree = require("./commands/Greta/Recree");
 
 // Je créer un client discord.
 const client = new Discord.Client();
@@ -35,6 +36,7 @@ client.on("message", (message) => {
 		Btc.parse(message) ||
 		Chess.parse(message) ||
 		Puzzle.parse(message) ||
+		Recree.parse(message) ||
 		Covid.parse(message);
 });
 
