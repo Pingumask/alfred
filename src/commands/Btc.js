@@ -9,12 +9,19 @@ module.exports = class Btc extends (
 	}
 
 	static action(message) {
+		function numberFR(number) {
+			return number.toLocaleString("fr-FR");
+		}
 		axios
 			.get(`https://blockchain.info/ticker`)
 			.then((response) => {
 				const data = response.data;
 				message.channel.send(
-					`Le prix actuel du BTC (prix du marché différé de 15 min) est de ${data.USD.symbol}${data.USD["15m"]} soit ${data.EUR["15m"]}${data.EUR.symbol}`
+					`Le prix actuel du BTC (prix du marché différé de 15 min) est de ${
+						data.USD.symbol
+					}${data.USD["15m"]} soit ${numberFR(data.EUR["15m"])}${
+						data.EUR.symbol
+					}`
 				);
 			})
 			.catch((err) => {
