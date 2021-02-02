@@ -20,6 +20,8 @@ module.exports = class Recree extends (
 			(role) => role.name === "Etudiants"
 		);
 
+		if (roleName===undefined) return message.reply(`Je n'ai pas trouvé le role @Etudiants`);
+		
 		/** Je gère la date > 60 min */
 		if (dateStart.getMinutes() + 10 >= 60) {
 			dateEnd = `0${dateStart.getMinutes() + 10 - 60}`;
